@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import BubbleClickEffect from "@/components/BubbleClickEffect";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <LoadingScreen />
           <BubbleClickEffect />
           <Navbar />
           {children}

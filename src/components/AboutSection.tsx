@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { User, Target, Award } from "lucide-react";
+import Image from "next/image";
 
 export default function AboutSection() {
   return (
@@ -74,6 +75,49 @@ export default function AboutSection() {
             </div>
           </motion.div>
         </div>
+
+        {/* Photo Highlights */}
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative h-[300px] rounded-3xl overflow-hidden shadow-2xl group border-2 border-[var(--glass-border)]"
+          >
+            <Image src="/about/about-1.jpg" fill className="object-cover group-hover:scale-110 transition-transform duration-700" alt="Professional Profile" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+              <span className="text-white font-bold tracking-wider text-lg">Professional Profile</span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="relative h-[380px] rounded-3xl overflow-hidden shadow-2xl group border-2 border-[var(--glass-border)] z-10 md:-mt-12"
+          >
+            <Image src="/about/about-2.jpg" fill className="object-cover group-hover:scale-110 transition-transform duration-700" alt="Leadership & Insights" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+              <span className="text-white font-bold tracking-wider text-lg">Leadership & Insights</span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="relative h-[300px] rounded-3xl overflow-hidden shadow-2xl group border-2 border-[var(--glass-border)]"
+          >
+            <Image src="/about/about-3.jpg" fill className="object-cover group-hover:scale-110 transition-transform duration-700" alt="Corporate & Events" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+              <span className="text-white font-bold tracking-wider text-lg">Corporate & Events</span>
+            </div>
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
