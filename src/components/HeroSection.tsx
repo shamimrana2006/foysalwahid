@@ -304,7 +304,7 @@ function AnimatedName() {
 // Typing animation component for the Title
 const designations = [
   "Foysal Wahid",
-  "Strategic HR Leader",
+  "Senior HR Leader",
   "HR Business Partner",
 ];
 
