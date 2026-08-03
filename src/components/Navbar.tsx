@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -63,7 +64,58 @@ export default function Navbar() {
             </button>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center gap-4">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full hover:bg-[var(--text-primary)]/10 text-[var(--text-primary)] transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          )}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-[var(--text-primary)] focus:outline-none"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass border-t border-[var(--glass-border)] overflow-hidden"
+          >
+            <div className="flex flex-col py-6 px-8 space-y-6">
+              {[
+                { label: "About", href: "/#about" },
+                { label: "Experience", href: "/#experience" },
+                { label: "Skills", href: "/#skills" },
+                { label: "Gallery", href: "/gallery" },
+                { label: "Contact", href: "/#contact" }
+              ].map((item) => (
+                <Link 
+                  key={item.label} 
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[var(--text-primary)] font-bold text-xl tracking-wide hover:text-[var(--walton-blue)] transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
