@@ -305,9 +305,7 @@ function AnimatedName() {
 const designations = [
   "Foysal Wahid",
   "Strategic HR Leader",
-  "Talent Acquisition Expert",
   "HR Business Partner",
-  "Organizational Developer"
 ];
 
 function TypeWriter() {
@@ -323,8 +321,8 @@ function TypeWriter() {
     const handleType = () => {
       const fullText = designations[i];
 
-      setText(isDeleting 
-        ? fullText.substring(0, text.length - 1) 
+      setText(isDeleting
+        ? fullText.substring(0, text.length - 1)
         : fullText.substring(0, text.length + 1)
       );
 
@@ -428,10 +426,10 @@ export default function HeroSection() {
 
           {/* Social Links */}
           <div className="flex items-center gap-4 mt-8 justify-center lg:justify-start">
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noreferrer" 
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noreferrer"
               className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#0077b5] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#0077b5]/50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:scale-110">
@@ -440,10 +438,10 @@ export default function HeroSection() {
                 <circle cx="4" cy="4" r="2"></circle>
               </svg>
             </a>
-            <a 
-              href="https://facebook.com" 
-              target="_blank" 
-              rel="noreferrer" 
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
               className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#1877F2] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#1877F2]/50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:scale-110">
