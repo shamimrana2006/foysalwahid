@@ -427,7 +427,7 @@ export default function HeroSection() {
           {/* Social Links */}
           <div className="flex items-center gap-4 mt-8 justify-center lg:justify-start">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/foysalwahid/"
               target="_blank"
               rel="noreferrer"
               className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#0077b5] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#0077b5]/50"
@@ -439,7 +439,7 @@ export default function HeroSection() {
               </svg>
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=100000233034396"
               target="_blank"
               rel="noreferrer"
               className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#1877F2] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#1877F2]/50"
