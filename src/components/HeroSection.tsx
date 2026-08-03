@@ -410,44 +410,52 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center lg:justify-start">
-            <a
+            <motion.a
               href="#contact"
-              className="px-8 py-4 bg-[var(--walton-blue)] hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(0,85,165,0.4)] hover:shadow-[0_0_30px_rgba(0,85,165,0.6)] hover:-translate-y-1 w-full sm:w-auto text-center"
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="px-8 py-4 bg-[var(--walton-blue)] hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(0,85,165,0.4)] hover:shadow-[0_0_30px_rgba(0,85,165,0.6)] w-full sm:w-auto text-center"
             >
               Get In Touch
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#experience"
-              className="px-8 py-4 bg-[var(--text-primary)]/10 hover:bg-[var(--text-primary)]/20 text-[var(--text-primary)] backdrop-blur-md border border-[var(--text-primary)]/20 rounded-full font-semibold transition-all hover:-translate-y-1 w-full sm:w-auto text-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-[var(--text-primary)]/10 hover:bg-[var(--text-primary)]/20 text-[var(--text-primary)] backdrop-blur-md border border-[var(--text-primary)]/20 rounded-full font-semibold transition-all w-full sm:w-auto text-center"
             >
               View Experience
-            </a>
+            </motion.a>
           </div>
 
           {/* Social Links */}
           <div className="flex items-center gap-4 mt-8 justify-center lg:justify-start">
-            <a
+            <motion.a
               href="https://www.linkedin.com/in/foysalwahid/"
               target="_blank"
               rel="noreferrer"
-              className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#0077b5] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#0077b5]/50"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#0077b5] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 border border-[var(--glass-border)] shadow-lg hover:shadow-[#0077b5]/50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:scale-110">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect x="2" y="9" width="4" height="12"></rect>
                 <circle cx="4" cy="4" r="2"></circle>
               </svg>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="https://www.facebook.com/profile.php?id=100000233034396"
               target="_blank"
               rel="noreferrer"
-              className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#1877F2] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 hover:-translate-y-1.5 border border-[var(--glass-border)] shadow-lg hover:shadow-[#1877F2]/50"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="group p-3 bg-[var(--text-primary)]/5 hover:bg-[#1877F2] text-[var(--text-primary)] hover:text-white rounded-full transition-all duration-300 border border-[var(--glass-border)] shadow-lg hover:shadow-[#1877F2]/50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:scale-110">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 

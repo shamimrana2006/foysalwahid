@@ -76,61 +76,108 @@ export default function LoadingScreen() {
           exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }} // smooth exit
         >
-          <div className="relative flex flex-col items-center">
+          <div className="relative flex flex-col items-center justify-center w-full h-full px-6 overflow-hidden">
             
-            {/* Spinning Rings Animation */}
-            <motion.div 
-              className="absolute inset-[-40px] border-t-2 border-r-2 border-[var(--walton-blue)] rounded-full opacity-60"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div 
-              className="absolute inset-[-60px] border-b-2 border-l-2 border-[var(--walton-red)] rounded-full opacity-60"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div 
-              className="absolute inset-[-80px] border-t-2 border-l-2 border-[var(--text-primary)] rounded-full opacity-10"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            />
-            
-            {/* Center Logo/Text Pulse */}
-            <motion.div 
-              className="w-24 h-24 rounded-full bg-gradient-to-tr from-[var(--walton-blue)] to-[var(--walton-red)] flex items-center justify-center shadow-[0_0_40px_rgba(0,85,165,0.4)] relative overflow-hidden"
-              animate={{ scale: [0.9, 1.05, 0.9] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="absolute inset-1 bg-[var(--background)] rounded-full flex items-center justify-center">
-                <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-[var(--walton-blue)] to-[var(--walton-red)] tracking-tighter">
-                  FW
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Percentage Text */}
-            <div className="mt-28 flex flex-col items-center">
-              <span className="text-6xl md:text-8xl font-black tabular-nums tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--walton-blue)] via-[#8e44ad] to-[var(--walton-red)] drop-shadow-[0_0_15px_rgba(0,85,165,0.4)]">
-                {progress}<span className="text-3xl md:text-5xl text-[var(--walton-red)] drop-shadow-none ml-1">%</span>
+            {/* Massive Background Percentage Watermark */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.03] select-none">
+              <span className="text-[30vw] font-black text-[var(--text-primary)] leading-none tabular-nums">
+                {progress}
               </span>
-              <motion.span 
-                className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-[var(--text-muted)] mt-6"
-                animate={{ opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {loadingText}
-              </motion.span>
             </div>
-            
-            {/* Progress Bar Line */}
-            <div className="w-64 md:w-80 h-1 bg-[var(--border-color)] rounded-full mt-8 overflow-hidden">
-              <motion.div 
-                className="h-full bg-gradient-to-r from-[var(--walton-blue)] to-[var(--walton-red)]"
-                initial={{ width: "0%" }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.1, ease: "linear" }}
-              />
+
+            {/* Smooth Floating Background Particles */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full"
+                  style={{
+                    width: i % 2 === 0 ? '4px' : '8px',
+                    height: i % 2 === 0 ? '4px' : '8px',
+                    backgroundColor: i % 2 === 0 ? 'var(--walton-blue)' : 'var(--walton-red)',
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`
+                  }}
+                  animate={{
+                    y: [0, -80, 0],
+                    x: [0, Math.random() * 40 - 20, 0],
+                    opacity: [0.1, 0.6, 0.1],
+                    scale: [1, 1.5, 1]
+                  }}
+                  transition={{
+                    duration: 5 + i,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
             </div>
+
+            <motion.div 
+              className="relative z-10 flex flex-col items-center"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              
+              {/* Photo Container with Spinning Rings */}
+              <div className="relative flex items-center justify-center mb-8">
+                
+                {/* Outer Spinning Ring */}
+                <motion.div
+                  className="absolute w-[120%] h-[120%] rounded-full border-[2px] border-dashed border-[var(--walton-blue)]/40"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                />
+                
+                {/* Inner Spinning Ring */}
+                <motion.div
+                  className="absolute w-[110%] h-[110%] rounded-full border-[2px] border-dashed border-[var(--walton-red)]/30"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                />
+
+                {/* Photo Fill Container */}
+                <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-[var(--glass-border)] shadow-2xl z-10 bg-[var(--background)]">
+                  
+                  {/* Background Grayscale Photo */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center grayscale opacity-20"
+                    style={{ backgroundImage: "url('/about/about-1.jpg')" }}
+                  />
+                  
+                  {/* Foreground Colored Photo (Fills up based on progress) */}
+                  <div 
+                    className="absolute bottom-0 left-0 w-full bg-cover bg-center transition-all duration-100 ease-linear"
+                    style={{ 
+                      backgroundImage: "url('/about/about-1.jpg')",
+                      height: `${progress}%`
+                    }}
+                  />
+                  
+                  {/* Overlay Ring Glow */}
+                  <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(0,0,0,0.6)] pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Progress Text */}
+              <div className="flex flex-col items-center">
+                <span className="text-4xl md:text-5xl font-black text-[var(--text-primary)] tabular-nums tracking-wider mb-2">
+                  {progress}<span className="text-[var(--walton-red)]">%</span>
+                </span>
+                
+                <motion.div 
+                  className="px-4 py-1.5 rounded-full bg-[var(--text-primary)]/5 border border-[var(--glass-border)] backdrop-blur-md"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <span className="text-xs font-bold tracking-[0.2em] text-[var(--walton-blue)] uppercase">
+                    {loadingText}
+                  </span>
+                </motion.div>
+              </div>
+
+            </motion.div>
           </div>
         </motion.div>
       )}

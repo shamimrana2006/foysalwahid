@@ -35,7 +35,12 @@ export default function AboutSection() {
               <div className="absolute -right-10 -top-10 w-40 h-40 bg-[var(--walton-red)] rounded-full mix-blend-screen filter blur-[64px] opacity-30" />
               
               <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-3">
-                <User className="text-[var(--walton-blue)]" size={28} />
+                <motion.div
+                  animate={{ y: [-3, 3, -3] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <User className="text-[var(--walton-blue)]" size={28} />
+                </motion.div>
                 Professional Summary
               </h3>
               <p className="text-[var(--text-muted)] leading-relaxed mb-6">
@@ -56,7 +61,12 @@ export default function AboutSection() {
           >
             <div className="glass p-8 rounded-2xl border border-[var(--glass-border)] hover:border-[var(--walton-blue)]/50 transition-colors group">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-3 flex items-center gap-3">
-                <Target className="text-[var(--walton-red)] group-hover:scale-110 transition-transform" />
+                <motion.div
+                  animate={{ scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Target className="text-[var(--walton-red)] group-hover:scale-125 transition-transform" />
+                </motion.div>
                 Strategic Impact
               </h4>
               <p className="text-[var(--text-muted)]">
@@ -66,7 +76,12 @@ export default function AboutSection() {
 
             <div className="glass p-8 rounded-2xl border border-[var(--glass-border)] hover:border-[var(--walton-red)]/50 transition-colors group">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-3 flex items-center gap-3">
-                <Award className="text-[var(--walton-blue)] group-hover:scale-110 transition-transform" />
+                <motion.div
+                  animate={{ rotate: [-10, 10, -10] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Award className="text-[var(--walton-blue)] group-hover:scale-125 transition-transform" />
+                </motion.div>
                 Leadership Philosophy
               </h4>
               <p className="text-[var(--text-muted)]">
