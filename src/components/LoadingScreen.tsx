@@ -57,7 +57,10 @@ export default function LoadingScreen() {
 
       if (currentStep >= steps) {
         clearInterval(timer);
-        setTimeout(() => setIsLoading(false), 400); // tiny pause at 100% to let users see it
+        setTimeout(() => {
+          sessionStorage.setItem("hasLoadedBefore", "true");
+          setIsLoading(false);
+        }, 400); // tiny pause at 100% to let users see it
       }
     }, intervalTime);
 
