@@ -68,8 +68,8 @@ export default function ExperienceEducation() {
   const [activeStation, setActiveStation] = useState(0);
 
   return (
-    <section id="experience" className="py-24 relative bg-[var(--background)]">
-      {/* Background ambient glows constrained to absolute inset to avoid overflow-hidden on the sticky parent */}
+    <section id="experience" className="py-24 relative bg-[var(--background)] overflow-hidden">
+      {/* Background ambient glows constrained to absolute inset */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-40 left-10 w-96 h-96 bg-[var(--walton-blue)]/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-40 right-10 w-96 h-96 bg-[var(--walton-red)]/5 rounded-full blur-[100px]" />
