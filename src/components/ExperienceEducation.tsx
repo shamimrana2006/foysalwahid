@@ -109,7 +109,7 @@ export default function ExperienceEducation() {
                 key={index} 
                 className={`relative flex flex-col md:flex-row items-center w-full ${isLast ? '' : 'mb-24'} ${isEven ? 'md:justify-start' : 'md:justify-end'}`}
                 onViewportEnter={() => setActiveStation(index)}
-                viewport={{ margin: "-30% 0px -30% 0px", amount: "some" }}
+                viewport={{ margin: "-45% 0px -45% 0px", amount: "some" }}
               >
                 
                 {/* Timeline Dot OR Magnetic Logo (Station Snapping) */}

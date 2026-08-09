@@ -4,16 +4,16 @@ import { useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { MapPin, Phone, Mail, Send, MessageSquare, Bell, Users, Link2, Globe } from "lucide-react";
 
-const FloatingCircle = ({ 
-  className, 
+const FloatingCircle = ({
+  className,
   colorClass,
-  size, 
+  size,
   delay,
   style
-}: { 
-  className: string, 
+}: {
+  className: string,
   colorClass: string,
-  size: number, 
+  size: number,
   delay: number,
   style?: any
 }) => {
@@ -22,12 +22,12 @@ const FloatingCircle = ({
       <motion.div
         className={`rounded-full ${colorClass}`}
         style={{ width: size, height: size }}
-        animate={{ 
+        animate={{
           y: [0, -15, 0],
           x: [0, 10, 0],
         }}
-        transition={{ 
-          duration: 3 + (delay % 2), 
+        transition={{
+          duration: 3 + (delay % 2),
           repeat: Infinity,
           ease: "easeInOut",
           delay
@@ -82,7 +82,7 @@ export default function ContactSection() {
     const height = rect.height;
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
-    
+
     x.set(mouseX / width - 0.5);
     y.set(mouseY / height - 0.5);
   };
@@ -94,7 +94,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden bg-[var(--background)] transition-colors duration-300">
-      
+
       {/* Decorative blobs for the background */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[50%] rounded-full bg-indigo-500/10 blur-[100px]" />
@@ -102,16 +102,16 @@ export default function ContactSection() {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        
-        <div 
+
+        <div
           className="bg-[var(--card-bg)] rounded-[2.5rem] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.2)] flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-6xl mx-auto border border-[var(--border-color)] relative overflow-hidden transition-colors duration-300"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          
+
           {/* LEFT SIDE - Form */}
           <div className="flex-1 w-full z-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -122,40 +122,40 @@ export default function ContactSection() {
               </p>
             </motion.div>
 
-            <motion.form 
+            <motion.form
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="space-y-6" 
+              className="space-y-6"
               onSubmit={(e) => e.preventDefault()}
             >
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[var(--text-muted)] ml-2">Your Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full bg-[var(--background)] border border-[var(--border-color)] rounded-full px-6 py-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all placeholder:text-[var(--text-muted)]/50"
                   placeholder="John Doe"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[var(--text-muted)] ml-2">Your Email</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full bg-[var(--background)] border border-[var(--border-color)] rounded-full px-6 py-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all placeholder:text-[var(--text-muted)]/50"
                   placeholder="john@example.com"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[var(--text-muted)] ml-2">Your Message</label>
-                <textarea 
+                <textarea
                   rows={4}
                   value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-[var(--background)] border border-[var(--border-color)] rounded-3xl px-6 py-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all resize-none placeholder:text-[var(--text-muted)]/50"
                   placeholder="Type something if you want..."
                 />
@@ -168,10 +168,10 @@ export default function ContactSection() {
 
           {/* RIGHT SIDE - Illustration and Info */}
           <div className="flex-1 flex flex-col justify-between items-center relative w-full z-10">
-            
+
             {/* Animated Illustration */}
             <div className="relative w-full h-[320px] flex items-center justify-center mt-8 lg:mt-0">
-              
+
               {/* Central Envelope Layer */}
               <motion.div style={{ x: layer1X, y: layer1Y }} className="absolute z-10">
                 <motion.div
@@ -182,7 +182,7 @@ export default function ContactSection() {
                   <div className="w-48 h-32 relative flex justify-center items-end">
                     {/* Back of envelope */}
                     <div className="absolute inset-0 bg-indigo-600 rounded-lg shadow-lg" />
-                    
+
                     {/* Paper sticking out */}
                     <div className="absolute bottom-6 w-40 h-40 bg-white dark:bg-gray-100 rounded-t-md shadow-inner flex flex-col pt-6 px-6 gap-3 z-10">
                       <div className="w-full h-2 bg-indigo-100 rounded-full" />
@@ -190,7 +190,7 @@ export default function ContactSection() {
                       <div className="w-5/6 h-2 bg-indigo-100 rounded-full" />
                       <div className="w-1/2 h-2 bg-indigo-100 rounded-full" />
                     </div>
-                    
+
                     {/* Front of envelope (Triangle flap) */}
                     <div className="absolute bottom-0 w-0 h-0 border-l-[96px] border-r-[96px] border-b-[85px] border-l-indigo-500/90 border-r-indigo-500/90 border-b-indigo-500 z-20 rounded-b-lg drop-shadow-md" />
                   </div>
@@ -238,7 +238,7 @@ export default function ContactSection() {
             </div>
 
             {/* Contact Details */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -261,25 +261,25 @@ export default function ContactSection() {
 
               {/* Social Links */}
               <div className="flex gap-4 pt-4">
-                <a 
-                  href="https://www.facebook.com/profile.php?id=100000233034396" 
-                  target="_blank" 
+                <a
+                  href="https://www.facebook.com/profile.php?id=100000233034396"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white flex items-center justify-center transition-all hover:scale-110"
                 >
                   <FacebookIcon size={18} />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/in/foysalwahid/" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/in/foysalwahid/"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-[#0077b5]/10 hover:bg-[#0077b5] text-[#0077b5] hover:text-white flex items-center justify-center transition-all hover:scale-110"
                 >
                   <LinkedinIcon size={18} />
                 </a>
-                <a 
-                  href="#" 
-                  target="_blank" 
+                <a
+                  href="#"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-[var(--text-primary)]/10 hover:bg-[var(--text-primary)] text-[var(--text-primary)] hover:text-[var(--card-bg)] flex items-center justify-center transition-all hover:scale-110"
                 >
