@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
 import { galleryCategories } from "@/data/galleryData";
@@ -19,19 +19,52 @@ export default function GallerySlider() {
     setSelectedImageIndex(null);
   };
 
-  const goToPrevious = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrevious = () => {
     if (selectedImageIndex !== null) {
       const category = galleryCategories[currentCategoryIndex];
       setSelectedImageIndex((prev) => (prev === 0 ? category.images.length - 1 : (prev as number) - 1));
     }
   };
 
-  const goToNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = () => {
     if (selectedImageIndex !== null) {
       const category = galleryCategories[currentCategoryIndex];
       setSelectedImageIndex((prev) => (prev === category.images.length - 1 ? 0 : (prev as number) + 1));
+    }
+  };
+
+  const goToPrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handlePrevious();
+  };
+
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleNext();
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImageIndex === null) return;
+      if (e.key === "ArrowLeft") {
+        handlePrevious();
+      } else if (e.key === "ArrowRight") {
+        handleNext();
+      } else if (e.key === "Escape") {
+        closeSlider();
+      }
+    };
+    
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImageIndex, currentCategoryIndex]);
+
+  const handleDragEnd = (e: any, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      handlePrevious();
+    } else if (info.offset.x < -swipeThreshold) {
+      handleNext();
     }
   };
 
@@ -122,14 +155,14 @@ export default function GallerySlider() {
             {/* Navigation Arrows */}
             <button 
               onClick={goToPrevious}
-              className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white bg-white/5 hover:bg-white/20 rounded-full transition-all z-[101] backdrop-blur-md hover:scale-110"
+              className="hidden md:block absolute left-4 md:left-12 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white bg-white/5 hover:bg-white/20 rounded-full transition-all z-[101] backdrop-blur-md hover:scale-110"
             >
               <ChevronLeft size={32} />
             </button>
 
             <button 
               onClick={goToNext}
-              className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white bg-white/5 hover:bg-white/20 rounded-full transition-all z-[101] backdrop-blur-md hover:scale-110"
+              className="hidden md:block absolute right-4 md:right-12 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white bg-white/5 hover:bg-white/20 rounded-full transition-all z-[101] backdrop-blur-md hover:scale-110"
             >
               <ChevronRight size={32} />
             </button>
@@ -144,11 +177,15 @@ export default function GallerySlider() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedImageIndex}
-                  initial={{ opacity: 0, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(10px)" }}
+                  initial={{ opacity: 0, filter: "blur(10px)", x: 0 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+                  exit={{ opacity: 0, filter: "blur(10px)", x: 0 }}
                   transition={{ duration: 0.15 }}
-                  className="relative w-full h-full"
+                  className="relative w-full h-full cursor-grab active:cursor-grabbing"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={handleDragEnd}
                 >
                   <Image
                     src={`/gallery/${galleryCategories[currentCategoryIndex].folder}/${galleryCategories[currentCategoryIndex].images[selectedImageIndex]}`}

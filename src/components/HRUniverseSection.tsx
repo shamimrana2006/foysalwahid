@@ -11,8 +11,8 @@ import { SVGLoader } from "three-stdlib";
 const HR_WORDS = [
   "Leadership", "Talent", "Culture", "Strategy",
   "Recruitment", "Performance", "Engagement",
-  "Mentorship", "Diversity", "Inclusion", 
-  "Development", "Rewards", "Analytics", 
+  "Mentorship", "Diversity", "Inclusion",
+  "Development", "Rewards", "Analytics",
   "Wellness", "Agile", "Impact", "Growth"
 ];
 
@@ -64,10 +64,10 @@ function ExtrudedSVGLogo({ svgString, color, isLight }: { svgString: string; col
 
   return (
     <mesh geometry={geometry}>
-      <meshStandardMaterial 
-        color={color} 
-        roughness={0.5} 
-        metalness={0.2} 
+      <meshStandardMaterial
+        color={color}
+        roughness={0.5}
+        metalness={0.2}
         emissive={isLight ? "#000000" : color}
         emissiveIntensity={isLight ? 0 : 0.2}
       />
@@ -107,11 +107,11 @@ function HRUniverse3DBackground() {
       const x = r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
       const z = r * Math.cos(phi);
-      
+
       // Cycle through brand colors for the logos
       const colors = [hrColor, aiColor, techColor, wordColor];
       const color = colors[i % colors.length];
-      
+
       return { svgString, color, position: [x, y, z] as [number, number, number] };
     });
   }, [hrColor, aiColor, techColor, wordColor]);
@@ -128,13 +128,13 @@ function HRUniverse3DBackground() {
       <Canvas camera={{ position: [0, 0, 15], fov: 45 }} className="absolute inset-0 z-10">
         <ambientLight intensity={isLight ? 1 : 0.5} />
         <directionalLight position={[5, 10, 5]} intensity={isLight ? 1.5 : 1} />
-        
+
         {/* Full 360 interactive rotation */}
         <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.8} />
-        
+
         {/* Only show stars in dark mode, or make them black/faint in light mode */}
         {!isLight && <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />}
-        
+
         <group>
           {wordsWithPos.map((item, i) => (
             <Float key={`word-${i}`} speed={2} rotationIntensity={1} floatIntensity={2}>
@@ -151,10 +151,10 @@ function HRUniverse3DBackground() {
                   bevelSegments={5}
                 >
                   {item.word}
-                  <meshStandardMaterial 
-                    color={wordColor} 
-                    roughness={0.5} 
-                    metalness={0.2} 
+                  <meshStandardMaterial
+                    color={wordColor}
+                    roughness={0.5}
+                    metalness={0.2}
                     emissive={isLight ? "#000000" : wordColor}
                     emissiveIntensity={isLight ? 0 : 0.2}
                   />
@@ -162,7 +162,7 @@ function HRUniverse3DBackground() {
               </Center>
             </Float>
           ))}
-          
+
           {/* Extruded 3D Logos (SVG Paths) */}
           {logosWithPos.map((item, i) => (
             <Float key={`logo-${i}`} speed={2 + (i % 2)} rotationIntensity={2} floatIntensity={2} position={item.position}>
@@ -225,7 +225,7 @@ export default function HRUniverseSection() {
     >
       {/* Top Fade to blend with previous section */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-[var(--background)] to-transparent z-30 pointer-events-none transition-colors duration-500" />
-      
+
       {/* Bottom Fade to blend with next section */}
       <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-[var(--background)] to-transparent z-30 pointer-events-none transition-colors duration-500" />
 
