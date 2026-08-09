@@ -401,7 +401,7 @@ export default function HeroSection() {
 
 
           <h2 className="text-lg md:text-xl font-semibold tracking-widest text-[var(--text-muted)] mb-3 uppercase">
-            Hello, I am
+            MEET THE EXPERT
           </h2>
 
           <TypeWriter />

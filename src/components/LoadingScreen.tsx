@@ -14,15 +14,20 @@ export default function LoadingScreen() {
     const hasLoaded = sessionStorage.getItem("hasLoadedBefore");
     if (hasLoaded) {
       setIsLoading(false);
-      return; // Skip loading logic completely
     }
+  }, []);
 
+  useEffect(() => {
     // Lock scrolling while loading
     if (isLoading) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isLoading]);
 
   useEffect(() => {
@@ -41,30 +46,45 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    const duration = 1200; // 1.2 seconds total simulated load time (faster)
-    const intervalTime = 30;
-    const steps = duration / intervalTime;
-    let currentStep = 0;
+    let isLoaded = document.readyState === "complete";
+    let currentProgress = 0;
+
+    const handleLoad = () => {
+      isLoaded = true;
+    };
+
+    if (!isLoaded) {
+      window.addEventListener("load", handleLoad);
+    }
 
     const timer = setInterval(() => {
-      currentStep++;
-      // Easing function for smoother progress visual (fast initially, slows down at end)
-      const rawProgress = currentStep / steps;
-      const easeOutProgress = 1 - Math.pow(1 - rawProgress, 3);
-      
-      const currentProgress = Math.min(Math.round(easeOutProgress * 100), 100);
-      setProgress(currentProgress);
-
-      if (currentStep >= steps) {
-        clearInterval(timer);
-        setTimeout(() => {
-          sessionStorage.setItem("hasLoadedBefore", "true");
-          setIsLoading(false);
-        }, 400); // tiny pause at 100% to let users see it
+      if (isLoaded) {
+        // If loaded, quickly move to 100
+        currentProgress += (100 - currentProgress) * 0.2 + 1;
+        if (currentProgress >= 100) {
+          currentProgress = 100;
+          setProgress(100);
+          clearInterval(timer);
+          setTimeout(() => {
+            sessionStorage.setItem("hasLoadedBefore", "true");
+            setIsLoading(false);
+          }, 400); // tiny pause at 100%
+        } else {
+          setProgress(Math.floor(currentProgress));
+        }
+      } else {
+        // If not loaded, slowly progress up to 90%
+        if (currentProgress < 90) {
+          currentProgress += (90 - currentProgress) * 0.05 + 0.2;
+          setProgress(Math.floor(currentProgress));
+        }
       }
-    }, intervalTime);
+    }, 30);
 
-    return () => clearInterval(timer);
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      clearInterval(timer);
+    };
   }, []);
 
   return (

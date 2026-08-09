@@ -31,8 +31,15 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <Link href="/">
-          <span className="text-2xl font-bold text-[var(--text-primary)] tracking-tighter">
+        <Link 
+          href="/"
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
+          <span className="text-2xl font-bold text-[var(--text-primary)] tracking-tighter cursor-pointer">
             FOYSAL<span className="text-[var(--walton-red)]">.</span>
           </span>
         </Link>
