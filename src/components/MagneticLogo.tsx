@@ -88,11 +88,11 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
         {/* Background Glowing Pulse - Scales up ONCE per hover, no continuous pulsing */}
         <motion.div
           animate={{
-            scale: isHovered ? 1.4 : 1,
-            opacity: isHovered ? 0.6 : 0.1,
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.25 : 0.05,
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="absolute inset-[-40%] rounded-full bg-gradient-to-tr from-[var(--walton-blue)] via-purple-500 to-[var(--walton-red)] blur-lg"
+          className="absolute inset-[-40%] rounded-full bg-gradient-to-tr from-[var(--walton-blue)] to-sky-400 blur-xl"
         />
 
         {/* Bubble Distribution Effect - Repeatedly plays while hovered */}
@@ -117,7 +117,7 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
                 delay: bubble.delay,
                 ease: "easeOut",
               }}
-              className="absolute rounded-full bg-gradient-to-br from-[var(--walton-blue)] to-[var(--walton-red)] shadow-sm"
+              className="absolute rounded-full bg-gradient-to-br from-[var(--walton-blue)] to-sky-300 shadow-sm"
               style={{
                 width: bubble.size,
                 height: bubble.size,
