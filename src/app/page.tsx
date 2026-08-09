@@ -4,6 +4,7 @@ import ExperienceEducation from "@/components/ExperienceEducation";
 import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import HRUniverseSection from "@/components/HRUniverseSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ExperienceEducation />
+      <HRUniverseSection />
       <SkillsSection />
       <ContactSection />
       <Footer />
