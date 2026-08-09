@@ -94,7 +94,7 @@ export default function ExperienceEducation() {
         <div className="relative max-w-5xl mx-auto mb-32 pt-16">
             
           {/* The Center Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[var(--walton-blue)] via-[var(--walton-red)] to-transparent md:-translate-x-1/2" />
+          <div className="absolute left-[25px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[var(--walton-blue)] via-[var(--walton-red)] to-transparent -translate-x-1/2" />
 
           {/* Timeline Items */}
           {experienceData.map((item, index) => {
@@ -111,7 +111,7 @@ export default function ExperienceEducation() {
               >
                 
                 {/* Timeline Dot OR Magnetic Logo (Station Snapping) */}
-                <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 z-20 flex items-center justify-center -ml-[9px] md:ml-0">
+                <div className="absolute left-[25px] md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
                   {isActive ? (
                     <MagneticLogo layoutId="walton-logo" />
                   ) : (
@@ -129,17 +129,21 @@ export default function ExperienceEducation() {
                     whileInView={{ opacity: 1, x: 0, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, type: "spring" }}
-                    className="glass p-8 rounded-3xl border border-[var(--glass-border)] hover:border-[var(--walton-blue)]/50 transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(0,85,165,0.2)] group relative overflow-hidden"
+                    className={`glass p-8 rounded-3xl border transition-all duration-500 group relative overflow-hidden ${
+                      isActive 
+                        ? 'border-[var(--walton-blue)] shadow-[0_20px_50px_-10px_rgba(0,85,165,0.4)] scale-[1.02]' 
+                        : 'border-[var(--glass-border)] hover:border-[var(--walton-blue)]/50 hover:shadow-[0_20px_40px_-10px_rgba(0,85,165,0.2)]'
+                    }`}
                   >
                     {/* Hover Glow */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--walton-blue)]/5 to-[var(--walton-red)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className={`absolute inset-0 bg-gradient-to-br from-[var(--walton-blue)]/5 to-[var(--walton-red)]/5 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
                     
                     <span className={`inline-block px-4 py-1.5 bg-[var(--text-primary)]/5 rounded-full text-xs font-bold tracking-wider text-[var(--walton-blue)] mb-5 flex items-center w-fit gap-2 relative z-10 ${isEven ? 'md:ml-auto' : ''}`}>
                       <Calendar size={14} />
                       {item.period}
                     </span>
                     
-                    <h4 className="text-2xl font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--walton-blue)] transition-colors relative z-10">
+                    <h4 className={`text-2xl font-black mb-2 transition-colors relative z-10 ${isActive ? 'text-[var(--walton-blue)]' : 'text-[var(--text-primary)] group-hover:text-[var(--walton-blue)]'}`}>
                       {item.role}
                     </h4>
                     

@@ -38,6 +38,10 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
     mouseY.set((e.clientY - centerY) / height);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
   const handleMouseLeave = () => {
     setIsHovered(false);
     // Reset magnetic pull
@@ -60,12 +64,11 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
       ref={ref}
       layoutId={layoutId}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      initial={{ scale: 0, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ type: "spring", stiffness: 100, damping: 15 }}
+      transition={{
+        layout: { type: "spring", stiffness: 100, damping: 15 }
+      }}
       // Enable pointer events here so it's interactive
       className="relative flex items-center justify-center cursor-pointer pointer-events-auto z-30"
       style={{
@@ -77,22 +80,22 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
       <motion.div
         style={{ x, y }}
         animate={{
-          scale: isHovered ? 1.15 : 1, // Smaller hover scale
+          scale: isHovered ? 1.15 : 1, // Keep the physical scale working every time
         }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
         className="relative z-10 flex items-center justify-center w-12 h-12 md:w-16 md:h-16" // Reduced default size
       >
-        {/* Background Glowing Pulse - Reduced Intensity */}
+        {/* Background Glowing Pulse - Scales up ONCE per hover, no continuous pulsing */}
         <motion.div
           animate={{
-            scale: isHovered ? [1.1, 1.4, 1.1] : [1, 1.1, 1],
-            opacity: isHovered ? [0.3, 0.6, 0.3] : [0.1, 0.2, 0.1],
+            scale: isHovered ? 1.4 : 1,
+            opacity: isHovered ? 0.6 : 0.1,
           }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="absolute inset-[-40%] rounded-full bg-gradient-to-tr from-[var(--walton-blue)] via-purple-500 to-[var(--walton-red)] blur-lg"
         />
 
-        {/* Bubble Distribution Effect (Only shown on hover) */}
+        {/* Bubble Distribution Effect - Repeatedly plays while hovered */}
         {bubbles.map((bubble) => {
           const rad = (bubble.angle * Math.PI) / 180;
           const targetX = Math.cos(rad) * bubble.distance;
@@ -123,7 +126,7 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
           );
         })}
 
-        {/* Inner Logo Container */}
+        {/* Inner Logo Container - Keep the inner container glow working normally or also 1-time? Standard shadow is fine */}
         <div className="relative bg-white/90 backdrop-blur-md w-full h-full rounded-full flex items-center justify-center border border-white/40 shadow-[0_0_15px_rgba(0,85,165,0.2)] overflow-hidden p-2 group-hover:shadow-[0_0_30px_rgba(227,24,55,0.4)] transition-shadow duration-500">
           <Image
             src="/experience/walton-logo.png"
