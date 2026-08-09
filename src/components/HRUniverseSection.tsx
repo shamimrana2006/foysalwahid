@@ -370,10 +370,10 @@ export default function HRUniverseSection() {
         </motion.div>
 
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-2xl">
-          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Human</span> Universe
+          Architect of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Culture</span>
         </h2>
-        <p className="text-indigo-200/80 max-w-xl text-sm md:text-base leading-relaxed">
-          Where talent meets opportunity. Navigating the infinite space of human potential, strategy, and organizational growth.
+        <p className="text-indigo-200/90 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-medium">
+          "Empowering people, transforming retail. Driving nationwide business growth through visionary HR leadership, high-performing teams, and a resilient workplace culture."
         </p>
       </div>
 
