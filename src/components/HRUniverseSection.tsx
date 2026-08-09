@@ -188,12 +188,12 @@ export default function HRUniverseSection() {
   const mouseXSpring = useSpring(mouseX, springConfig);
   const mouseYSpring = useSpring(mouseY, springConfig);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["25deg", "-25deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-25deg", "25deg"]);
-  const faceX = useTransform(mouseXSpring, [-0.5, 0.5], [-15, 15]);
-  const faceY = useTransform(mouseYSpring, [-0.5, 0.5], [-15, 15]);
-  const eyeX = useTransform(mouseXSpring, [-0.5, 0.5], [-8, 8]);
-  const eyeY = useTransform(mouseYSpring, [-0.5, 0.5], [-6, 6]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["35deg", "-35deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-35deg", "35deg"]);
+  const faceX = useTransform(mouseXSpring, [-0.5, 0.5], [-40, 40]);
+  const faceY = useTransform(mouseYSpring, [-0.5, 0.5], [-40, 40]);
+  const eyeX = useTransform(mouseXSpring, [-0.5, 0.5], [-25, 25]);
+  const eyeY = useTransform(mouseYSpring, [-0.5, 0.5], [-20, 20]);
 
   useEffect(() => {
     setIsMounted(true);
