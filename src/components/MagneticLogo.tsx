@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface MagneticLogoProps {
   layoutId?: string;
@@ -49,15 +49,19 @@ export default function MagneticLogo({ layoutId }: MagneticLogoProps) {
     mouseY.set(0);
   };
 
-  // Generate many continuous random bubbles for the distribution effect
-  const bubbles = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 8 + 3,
-    angle: Math.random() * 360,
-    distance: Math.random() * 50 + 40,
-    delay: Math.random() * 2, // Spread out the start times
-    duration: Math.random() * 1 + 1.5,
-  }));
+  const [bubbles, setBubbles] = useState<Array<{id: number, size: number, angle: number, distance: number, delay: number, duration: number}>>([]);
+
+  useEffect(() => {
+    // Generate many continuous random bubbles for the distribution effect only on the client
+    setBubbles(Array.from({ length: 30 }).map((_, i) => ({
+      id: i,
+      size: Math.random() * 8 + 3,
+      angle: Math.random() * 360,
+      distance: Math.random() * 50 + 40,
+      delay: Math.random() * 2, // Spread out the start times
+      duration: Math.random() * 1 + 1.5,
+    })));
+  }, []);
 
   return (
     <motion.div

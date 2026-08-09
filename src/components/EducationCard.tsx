@@ -65,14 +65,22 @@ export default function EducationCard({ item, index }: EducationCardProps) {
   };
 
   // Generate bubbles for this card once
-  const bubbles = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 5 + 2,
-    angle: Math.random() * 360,
-    distance: Math.random() * 150 + 50,
-    delay: Math.random() * 0.5,
-    duration: Math.random() * 1 + 1.5,
-  }));
+  const bubbles = Array.from({ length: 30 }).map((_, i) => {
+    // Deterministic pseudo-random generation based on index
+    const pseudoRandom = (seed: number) => {
+      const x = Math.sin(seed + 1000) * 10000;
+      return x - Math.floor(x);
+    };
+
+    return {
+      id: i,
+      size: pseudoRandom(i) * 5 + 2,
+      angle: pseudoRandom(i + 30) * 360,
+      distance: pseudoRandom(i + 60) * 150 + 50,
+      delay: pseudoRandom(i + 90) * 0.5,
+      duration: pseudoRandom(i + 120) * 1 + 1.5,
+    };
+  });
 
   return (
     <div style={{ perspective: "1000px" }} className={`w-full h-full relative ${index === 0 ? 'lg:col-span-2' : ''}`}>

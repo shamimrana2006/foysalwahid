@@ -10,6 +10,12 @@ import { useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 
 // Custom Stars that respond to light/dark mode
+// Deterministic pseudo-random number generator to prevent hydration mismatch
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+};
+
 function ThemeStars() {
   const { resolvedTheme } = useTheme();
   const starColor = resolvedTheme === "light" ? "#000000" : "#ffffff";
@@ -18,9 +24,9 @@ function ThemeStars() {
   const sphere = useMemo(() => {
     const positions = new Float32Array(2000 * 3);
     for (let i = 0; i < 2000; i++) {
-      const r = 50 * Math.cbrt(Math.random());
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 50 * Math.cbrt(pseudoRandom(i));
+      const theta = pseudoRandom(i + 2000) * 2 * Math.PI;
+      const phi = Math.acos(2 * pseudoRandom(i + 4000) - 1);
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
@@ -136,9 +142,9 @@ function Network() {
     for (let i = 0; i < 70; i++) {
       pts.push(
         new THREE.Vector3(
-          (Math.random() - 0.5) * 15,
-          (Math.random() - 0.5) * 15,
-          (Math.random() - 0.5) * 10 - 2
+          (pseudoRandom(i) - 0.5) * 15,
+          (pseudoRandom(i + 70) - 0.5) * 15,
+          (pseudoRandom(i + 140) - 0.5) * 10 - 2
         )
       );
     }

@@ -115,12 +115,12 @@ export default function LoadingScreen() {
                     width: i % 2 === 0 ? '4px' : '8px',
                     height: i % 2 === 0 ? '4px' : '8px',
                     backgroundColor: i % 2 === 0 ? 'var(--walton-blue)' : 'var(--walton-red)',
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
+                    left: `${(i * 13.5 + 7.2) % 100}%`,
+                    top: `${(i * 21.3 + 3.1) % 100}%`
                   }}
                   animate={{
                     y: [0, -80, 0],
-                    x: [0, Math.random() * 40 - 20, 0],
+                    x: [0, ((i * 5.7) % 40) - 20, 0],
                     opacity: [0.1, 0.6, 0.1],
                     scale: [1, 1.5, 1]
                   }}
