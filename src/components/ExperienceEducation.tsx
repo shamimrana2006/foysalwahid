@@ -61,6 +61,8 @@ const educationData = [
 import { useState } from "react";
 import Image from "next/image";
 import MagneticLogo from "./MagneticLogo";
+import ExperienceCard from "./ExperienceCard";
+import EducationCard from "./EducationCard";
 
 export default function ExperienceEducation() {
   const [activeStation, setActiveStation] = useState(0);
@@ -122,39 +124,70 @@ export default function ExperienceEducation() {
                   )}
                 </div>
 
-                {/* Card */}
-                <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                  <motion.div 
-                    initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
-                    whileInView={{ opacity: 1, x: 0, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, type: "spring" }}
-                    className={`glass p-8 rounded-3xl border transition-all duration-500 group relative overflow-hidden ${
-                      isActive 
-                        ? 'border-[var(--walton-blue)] shadow-[0_20px_50px_-10px_rgba(0,85,165,0.4)] scale-[1.02]' 
-                        : 'border-[var(--glass-border)] hover:border-[var(--walton-blue)]/50 hover:shadow-[0_20px_40px_-10px_rgba(0,85,165,0.2)]'
-                    }`}
-                  >
-                    {/* Hover Glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-br from-[var(--walton-blue)]/5 to-[var(--walton-red)]/5 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                    
-                    <span className={`inline-block px-4 py-1.5 bg-[var(--text-primary)]/5 rounded-full text-xs font-bold tracking-wider text-[var(--walton-blue)] mb-5 flex items-center w-fit gap-2 relative z-10 ${isEven ? 'md:ml-auto' : ''}`}>
-                      <Calendar size={14} />
-                      {item.period}
-                    </span>
-                    
-                    <h4 className={`text-2xl font-black mb-2 transition-colors relative z-10 ${isActive ? 'text-[var(--walton-blue)]' : 'text-[var(--text-primary)] group-hover:text-[var(--walton-blue)]'}`}>
-                      {item.role}
-                    </h4>
-                    
-                    <h5 className="text-[var(--walton-red)] font-bold mb-5 text-lg relative z-10">
-                      {item.company}
-                    </h5>
-                    
-                    <p className="text-[var(--text-muted)] leading-relaxed relative z-10">
-                      {item.description}
-                    </p>
-                  </motion.div>
+                {/* Card Container */}
+                <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'} relative`}>
+                  
+                  {/* Premium Glowing Bubbles behind the Active Card */}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="active-card-aura"
+                      className="absolute inset-0 z-0 pointer-events-none overflow-visible"
+                    >
+                      {/* Big ambient spheres (Slower glowing) */}
+                      <motion.div 
+                        animate={{ x: [0, 30, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
+                        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                        className={`absolute -top-10 w-40 h-40 rounded-full blur-[50px] ${isEven ? '-left-10 bg-[var(--walton-blue)]/30' : '-right-10 bg-[var(--walton-blue)]/30'}`}
+                      />
+                      <motion.div 
+                        animate={{ x: [0, -30, 0], y: [0, 30, 0], scale: [1, 1.3, 1] }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                        className={`absolute -bottom-10 w-40 h-40 rounded-full blur-[50px] ${isEven ? '-right-10 bg-[var(--walton-red)]/20' : '-left-10 bg-[var(--walton-red)]/20'}`}
+                      />
+
+                      {/* Continuous small particle bubbles emanating from center */}
+                      {Array.from({ length: 50 }).map((_, i) => {
+                        // We use pseudo-randomness based on index so it's stable per render, avoiding hydration mismatch if this were SSR
+                        const size = (i % 5) * 2 + 3;
+                        const angle = i * 7.2; // 360 / 50
+                        const distance = (i % 4) * 80 + 100;
+                        const delay = (i % 10) * 0.05; // Much faster start time (0s to 0.45s max delay)
+                        const duration = (i % 3) * 0.8 + 1.2; 
+
+                        const rad = (angle * Math.PI) / 180;
+                        const targetX = Math.cos(rad) * distance;
+                        const targetY = Math.sin(rad) * distance;
+
+                        return (
+                          <motion.div
+                            key={`card-bubble-${i}`}
+                            initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                            animate={{
+                              x: targetX,
+                              y: targetY,
+                              scale: 1,
+                              opacity: [0, 0.8, 0],
+                            }}
+                            transition={{
+                              duration: duration,
+                              repeat: Infinity,
+                              delay: delay,
+                              ease: "easeOut",
+                            }}
+                            className="absolute top-1/2 left-1/2 -mt-1 -ml-1 rounded-full bg-gradient-to-br from-[var(--walton-blue)] to-[var(--walton-red)] shadow-[0_0_8px_rgba(227,24,55,0.6)]"
+                            style={{
+                              width: size,
+                              height: size,
+                            }}
+                          />
+                        );
+                      })}
+                    </motion.div>
+                  )}
+
+                  <div className="z-10 relative">
+                    <ExperienceCard item={item} isActive={isActive} isEven={isEven} />
+                  </div>
                 </div>
               </motion.div>
             );
@@ -177,33 +210,7 @@ export default function ExperienceEducation() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {educationData.map((item, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`glass p-8 rounded-3xl border border-[var(--glass-border)] hover:-translate-y-2 transition-all duration-300 hover:border-[var(--text-muted)]/30 hover:shadow-xl group relative overflow-hidden ${
-                  index === 0 ? 'lg:col-span-2 bg-[var(--text-primary)]/5' : ''
-                }`}
-              >
-                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <GraduationCap size={48} />
-                </div>
-                
-                <span className="inline-block px-3 py-1 bg-[var(--text-primary)]/10 rounded-full text-xs font-bold text-[var(--text-muted)] mb-6 flex items-center w-fit gap-2 relative z-10">
-                  <Calendar size={14} />
-                  {item.period}
-                </span>
-                
-                <h4 className={`font-bold text-[var(--text-primary)] mb-3 relative z-10 ${index === 0 ? 'text-3xl' : 'text-xl'}`}>
-                  {item.degree}
-                </h4>
-                
-                <h5 className="text-[var(--text-muted)] font-medium leading-relaxed relative z-10">
-                  {item.institution}
-                </h5>
-              </motion.div>
+              <EducationCard key={`edu-${index}`} item={item} index={index} />
             ))}
           </div>
         </div>
