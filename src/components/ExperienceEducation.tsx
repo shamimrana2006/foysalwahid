@@ -8,7 +8,7 @@ const experienceData = [
     role: "Head of HRM",
     company: "Walton Plaza",
     period: "Current",
-    description: "Leading HR strategies and people initiatives for a nationwide retail network of more than 700 showrooms. Focused on building high-performing teams and strengthening workplace culture."
+    description: "Leading HR strategies and people initiatives for a nationwide retail network of more than 700+ showrooms. Focused on building high-performing teams and strengthening workplace culture."
   },
   {
     role: "Recruitment Manager",
@@ -76,9 +76,9 @@ export default function ExperienceEducation() {
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        
+
         {/* Unified Main Heading */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function ExperienceEducation() {
 
         {/* --- EXPERIENCE TIMELINE --- */}
         <div className="relative max-w-5xl mx-auto mb-32 pt-16">
-            
+
           {/* The Center Line */}
           <div className="absolute left-[25px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[var(--walton-blue)] via-[var(--walton-red)] to-transparent -translate-x-1/2" />
 
@@ -105,41 +105,41 @@ export default function ExperienceEducation() {
             const isActive = activeStation === index;
 
             return (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className={`relative flex flex-col md:flex-row items-center w-full ${isLast ? '' : 'mb-24'} ${isEven ? 'md:justify-start' : 'md:justify-end'}`}
                 onViewportEnter={() => setActiveStation(index)}
                 viewport={{ margin: "-45% 0px -45% 0px", amount: "some" }}
               >
-                
+
                 {/* Timeline Dot OR Magnetic Logo (Station Snapping) */}
                 <div className="absolute left-[25px] md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
                   {isActive ? (
                     <MagneticLogo layoutId="walton-logo" />
                   ) : (
-                    <motion.div 
+                    <motion.div
                       layoutId={`dot-${index}`}
-                      className="w-5 h-5 rounded-full bg-[var(--background)] border-4 border-[var(--walton-red)] shadow-[0_0_15px_rgba(227,24,55,0.6)]" 
+                      className="w-5 h-5 rounded-full bg-[var(--background)] border-4 border-[var(--walton-red)] shadow-[0_0_15px_rgba(227,24,55,0.6)]"
                     />
                   )}
                 </div>
 
                 {/* Card Container */}
                 <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'} relative`}>
-                  
+
                   {/* Premium Glowing Bubbles behind the Active Card */}
                   {isActive && (
-                    <motion.div 
+                    <motion.div
                       layoutId="active-card-aura"
                       className="absolute inset-0 z-0 pointer-events-none overflow-visible"
                     >
                       {/* Big ambient spheres (Slower glowing) */}
-                      <motion.div 
+                      <motion.div
                         animate={{ x: [0, 30, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
                         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
                         className={`absolute -top-10 w-40 h-40 rounded-full blur-[50px] ${isEven ? '-left-10 bg-[var(--walton-blue)]/30' : '-right-10 bg-[var(--walton-blue)]/30'}`}
                       />
-                      <motion.div 
+                      <motion.div
                         animate={{ x: [0, -30, 0], y: [0, 30, 0], scale: [1, 1.3, 1] }}
                         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
                         className={`absolute -bottom-10 w-40 h-40 rounded-full blur-[50px] ${isEven ? '-right-10 bg-[var(--walton-red)]/20' : '-left-10 bg-[var(--walton-red)]/20'}`}
@@ -152,7 +152,7 @@ export default function ExperienceEducation() {
                         const angle = i * 7.2; // 360 / 50
                         const distance = (i % 4) * 80 + 100;
                         const delay = (i % 10) * 0.05; // Much faster start time (0s to 0.45s max delay)
-                        const duration = (i % 3) * 0.8 + 1.2; 
+                        const duration = (i % 3) * 0.8 + 1.2;
 
                         const rad = (angle * Math.PI) / 180;
                         const targetX = Math.cos(rad) * distance;
@@ -196,7 +196,7 @@ export default function ExperienceEducation() {
 
         {/* --- EDUCATION BENTO GRID --- */}
         <div className="max-w-6xl mx-auto pt-16 border-t border-[var(--border-color)]">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

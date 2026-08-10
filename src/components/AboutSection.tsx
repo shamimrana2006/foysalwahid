@@ -10,9 +10,9 @@ export default function AboutSection() {
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--walton-blue)] to-transparent opacity-30" />
       <div className="absolute -left-40 top-40 w-96 h-96 bg-[var(--walton-blue)] rounded-full mix-blend-screen filter blur-[128px] opacity-20" />
-      
+
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -24,7 +24,7 @@ export default function AboutSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-12 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -33,7 +33,7 @@ export default function AboutSection() {
           >
             <div className="relative rounded-2xl overflow-hidden glass p-8 border border-[var(--glass-border)] shadow-2xl">
               <div className="absolute -right-10 -top-10 w-40 h-40 bg-[var(--walton-red)] rounded-full mix-blend-screen filter blur-[64px] opacity-30" />
-              
+
               <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-3">
                 <motion.div
                   animate={{ y: [-3, 3, -3] }}
@@ -44,15 +44,15 @@ export default function AboutSection() {
                 Professional Summary
               </h3>
               <p className="text-[var(--text-muted)] leading-relaxed mb-6">
-                HR leader with more than 15 years of experience in strategic HR management, talent acquisition, HR operations, and business partnering across manufacturing, service management, and retail chainshop industries.
+                HR leader with more than 15+ years of experience in strategic HR management, talent acquisition, HR operations, and business partnering across manufacturing, service management, and retail chainshop industries.
               </p>
               <p className="text-[var(--text-muted)] leading-relaxed">
-                Currently serving as <strong className="text-[var(--text-primary)]">Head of HRM at Walton Plaza</strong>, leading HR strategies and people initiatives for a nationwide retail network of more than 700 showrooms. Focused on building high-performing teams, strengthening workplace culture, and driving business growth through practical and people-centric HR solutions.
+                Currently serving as <strong className="text-[var(--text-primary)]">Head of HRM at Walton Plaza</strong>, leading HR strategies and people initiatives for a nationwide retail network of more than 700+ showrooms. Focused on building high-performing teams, strengthening workplace culture, and driving business growth through practical and people-centric HR solutions.
               </p>
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -93,7 +93,7 @@ export default function AboutSection() {
 
         {/* Photo Highlights */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -106,7 +106,7 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -119,7 +119,7 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
