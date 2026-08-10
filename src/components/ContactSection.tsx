@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { MapPin, Phone, Mail, Send, MessageSquare, Bell, Users, Link2, Globe } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 const FloatingCircle = ({
   className,
@@ -60,6 +61,39 @@ const GmailIcon = ({ size = 24, className = "" }) => (
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
+    
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          time: new Date().toLocaleString(),
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+      );
+      
+      setSubmitStatus('success');
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -128,7 +162,7 @@ export default function ContactSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="space-y-6"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
             >
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[var(--text-muted)] ml-2">Your Name</label>
@@ -160,9 +194,15 @@ export default function ContactSection() {
                   placeholder="Type something if you want..."
                 />
               </div>
-              <button className="py-4 px-10 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full font-semibold transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-1">
-                Send Message
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="py-4 px-10 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full font-semibold transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Message Sent!' : 'Send Message'}
               </button>
+              {submitStatus === 'success' && <p className="text-emerald-500 font-medium ml-2 mt-2">✨ Your message was sent successfully!</p>}
+              {submitStatus === 'error' && <p className="text-rose-500 font-medium ml-2 mt-2">❌ Failed to send message. Please try again.</p>}
             </motion.form>
           </div>
 
