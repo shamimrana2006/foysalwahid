@@ -46,6 +46,7 @@ function ExtrudedSVGLogo({ svgString, color, isLight }: { svgString: string; col
     const svgData = loader.parse(svgString);
     const shapes: THREE.Shape[] = [];
     svgData.paths.forEach((path) => {
+      // @ts-expect-error - Some versions of @types/three might not define the isCCW argument
       shapes.push(...path.toShapes(true));
     });
     const geom = new THREE.ExtrudeGeometry(shapes, {
